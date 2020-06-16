@@ -5,15 +5,30 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+    xmlns:touch="clr-namespace:TouchEffect;assembly=TouchEffect"
     mc:Ignorable="d">
 
     <Grid>
+
         <MediaElement
+            x:Name="Video"
             Aspect="AspectFill"
             HeightRequest="100"
             HorizontalOptions="Fill"
+            IsLooping="True"
+            ShowsPlaybackControls="False"
             Source="ms-appx:///oceanwaves.mp4"
-            WidthRequest="100" />
-    </Grid>
+            WidthRequest="100">
+            <MediaElement.Effects>
+                <touch:TouchEff Completed="TouchEff_Completed" />
+            </MediaElement.Effects>
+        </MediaElement>
 
+        <skia:SKCanvasView
+            x:Name="SkiaOverlay"
+            HorizontalOptions="Fill"
+            PaintSurface="SkiaOverlay_PaintSurface"
+            VerticalOptions="Fill" />
+    </Grid>
 </ContentPage>
